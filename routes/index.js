@@ -1,6 +1,6 @@
 'use strict';
 
-var mongodb = require('../models/mongodb');
+var userControl = require('../controller/user.js');
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
@@ -9,7 +9,7 @@ module.exports = function (app) {
     app.post('/users', function (req, res) {
         var name = req.query.name || 'name';
         var password = req.query.password || 'password';
-        mongodb.save(name, password, function (err) {
+        userControl.save(name, password, function (err) {
             if (err) {
                 res.json({code : 1, msg : err.stack});
             } else {
@@ -19,7 +19,7 @@ module.exports = function (app) {
     });
     app.get('/users', function (req, res) {
         var name = req.query.name;
-        mongodb.get(name, function (err, users) {
+        userControl.get(name, function (err, users) {
             console.log(users);
         });
     });

@@ -27,5 +27,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 routes(app);
 
 app.listen(app.get('port'), function () {
-    console.log('Express server listen on port:' + app.get('port'));
+    console.log('Express server listen on port: ' + app.get('port'));
 });

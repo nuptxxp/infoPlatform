@@ -16,30 +16,4 @@ mongoose.connect(config.mongodb.connect, {
     }
 });
 
-var userSchema = new mongoose.Schema({
-    name : String,
-    password : String,
-    email : String
-}, {
-    collection : 'users'
-});
-
-var userModel = mongoose.model('user', userSchema);
-
-exports.save = function (name, password, callback) {
-    var user = {
-        name : name,
-        password : password
-    };
-    user = new userModel(user);
-    user.save(function (err) {
-        callback(err);
-    });
-};
-
-exports.get = function (name, callback) {
-    userModel.findOne({name : name}, function (err, user) {
-        if (err) return callback(err);
-        callback(null, user);
-    });
-};
+exports.User = mongoose.model('User', require('./user'));
