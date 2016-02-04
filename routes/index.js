@@ -7,8 +7,8 @@ module.exports = function (app) {
         res.render('index', {title : 'Express'});
     });
     app.post('/users', function (req, res) {
-        var name = req.query.name || 'name';
-        var password = req.query.password || 'password';
+        var name = req.body.name || 'name';
+        var password = req.body.password || 'password';
         userControl.save(name, password, function (err) {
             if (err) {
                 res.json({code : 1, msg : err.stack});
@@ -20,7 +20,7 @@ module.exports = function (app) {
     app.get('/users', function (req, res) {
         var name = req.query.name;
         userControl.get(name, function (err, users) {
-            console.log(users);
+            res.send(users);
         });
     });
 };
